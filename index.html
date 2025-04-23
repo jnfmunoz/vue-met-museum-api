@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metropolitan Museum of Art Collection API</title>
+</head>
+<body>
+    <div id="app">
+        <h4>Metropolitan Museum of Art Collection API</h4>
+
+        <div v-if="loading">
+            Loading...
+        </div>
+
+        <div v-if="!loading">
+            <label>Department</label><br>
+            <select v-model="id_department" v-if="lists.departments.length > 0" >
+                <option v-for="item in lists.departments" v-bind:value="item.departmentId">{{ item.displayName }}</option>
+            </select>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="app.js"></script>
+
+</html>
