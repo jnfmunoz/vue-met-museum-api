@@ -18,6 +18,14 @@
             <select v-model="id_department" v-if="lists.departments.length > 0" >
                 <option v-for="item in lists.departments" v-bind:value="item.departmentId">{{ item.displayName }}</option>
             </select>
+        
+            <div v-if="objectFirst">
+
+                First Object: {{ objectFirst.title }}
+                <img v-if="objectFirst.primaryImage" v-bind:src="objectFirst.primaryImage" style="max-width: 400px;"/>
+                 
+            </div>
+
         </div>
     </div>
 </body>

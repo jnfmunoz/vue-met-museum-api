@@ -10,6 +10,8 @@ let app = new Vue({
         lists: {
             departments: []
         },
+        objectFirst: null,
+        randomId: 0,
     },
 
     watch: {
@@ -22,7 +24,6 @@ let app = new Vue({
 
     methods: {
         async loadDepartments(){
-
             this.loading = true;
             let response = await axios.get('https://collectionapi.metmuseum.org/public/collection/v1/departments');
             console.log(response);
@@ -40,14 +41,21 @@ let app = new Vue({
 
         async loadObjects(){
             let response = await axios.get('https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=' + this.id_department);
-            console.log(response);
+            // console.log(response);
 
-            let randomId = this.getRandomInt(0, response.data.total - 1);
+            let randomIndex = this.getRandomInt(0, response.data.total - 1);
 
+            let randomId = response.data.objectIDs[randomIndex];
+            this.randomId = randomId;
+
+            this.seeObject(randomId);
         },
 
-        async seeObject(){
-            
+        async seeObject(id){
+            let response = await axios.get('https://collectionapi.metmuseum.org/public/collection/v1/objects/' + id);
+            console.log(response);
+
+            this.objectFirst = response.data;
         },
     },
 
